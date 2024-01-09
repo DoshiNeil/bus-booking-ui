@@ -1,0 +1,33 @@
+.reservationLayout{
+    display: flex;
+    flex:1;
+    flex-direction: row;
+    gap:1.5rem;
+    padding: 0.75rem;
+}
+
+.seatMap {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    gap:0.75rem;
+}
+
+.infoText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+        width:auto;      
+        background-color: #d84e55;
+        font-weight: 400;
+        font-size: smaller;
+        padding:3px 20px;
+    }
+}
+
+.legends {
+    display: flex;
+    flex:1;
+    flex-direction: column;
+}
