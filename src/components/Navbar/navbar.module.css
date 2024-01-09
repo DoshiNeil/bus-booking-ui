@@ -15,8 +15,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 32px;
-	height: 32px;
+	width: 36px;
+	height: 36px;
 }
 
 .logoTitle {
@@ -32,32 +32,26 @@
 	}
 }
 
-/* Dropdown content (hidden by default) */
-.dropdownContent {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdownContent a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
-  /* Add a grey background color to dropdown links on hover */
-  .dropdownContent a:hover {
-    background-color: #ddd;
-  }
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdownContent {
-    display: block;
-  }
+.dropdownField {
+	display: flex;
+	flex-grow: 1;
+	position: relative;
+	select {
+		width: 100%;
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+		border: 0;
+		background-color: transparent;
+		padding-right: 1.5rem;
+		appearance: none;
+		color: var(--c-text-tertiary);
+		width: 100%;
+	}
+
+	span {
+		position: absolute;
+		right: 0;
+		top:55%;
+		transform: translateY(-50%);
+	}
+}

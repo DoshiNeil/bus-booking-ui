@@ -1,11 +1,17 @@
 import React from 'react';
-import RootLayout from './components/RootLayout';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
+import Reservation from './components/Reservation';
 function App() {
   return (
-    <div className="App">
-      <RootLayout />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/reservation" element={<Reservation />} />
+        {/** move this to Page not found page*/}
+        <Route path="*" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
