@@ -1,3 +1,7 @@
+export enum Orientation {
+  VERTICAL,
+  HORIZONTAL,
+}
 export enum Deck {
   LOWER = 'lower deck',
   UPPER = 'upper deck',

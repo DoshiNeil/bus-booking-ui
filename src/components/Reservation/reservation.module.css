@@ -25,6 +25,10 @@
     }
 }
 
+.mapTitle{
+    text-transform: capitalize;
+}
+
 .legends {
     display: flex;
     flex:1;

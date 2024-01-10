@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './reservation.module.css';
 import SeatMap from './SeatMap';
 import Legends from './Legends';
-import { Deck } from '../../types/types';
+import { seatMap as map } from '../../constants/seedData';
 
 export const Reservation: React.FC = () => {
+  const [seatMap, setSeatMap] = useState(map);
+
   return (
     <div className={style.reservationLayout}>
       <div className={style.seatMap}>
@@ -13,10 +15,16 @@ export const Reservation: React.FC = () => {
             Click on an available seat to proceed with your transaction
           </span>
         </div>
-        <h3>Lower Deck</h3>
-        <SeatMap />
-        <h3>Upper Deck</h3>
-        <SeatMap deck={Deck.UPPER} />
+        {seatMap.map((floorPlan) => (
+          <>
+            <h3 className={style.mapTitle}>{floorPlan.deck}</h3>
+            <SeatMap
+              map={floorPlan.map}
+              seatSize={floorPlan.seatSize}
+              deck={floorPlan.deck}
+            />
+          </>
+        ))}
       </div>
       <div className={style.legends}>
         <h3>Seat Legends </h3>
