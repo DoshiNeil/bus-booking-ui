@@ -227,7 +227,7 @@ export const seatMap = [
         y: 34 + 3.3 * 34,
         orientation: Orientation.HORIZONTAL,
         seatNumber: '31 U',
-        status: SeatStatus.AVAILABLE,
+        status: SeatStatus.FEMALE_ONLY,
       },
       {
         x: 80 + 65 * 4.4,

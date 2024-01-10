@@ -47,6 +47,8 @@ export const SeatMap: React.FC<SeatMapProps> = ({
             width={seatSize.width}
             height={seatSize.height}
             status={seat.status}
+            seatNumber={seat.seatNumber}
+            deck={deck}
           />
         ))}
       </Layer>

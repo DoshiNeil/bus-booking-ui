@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Rect } from 'react-konva';
-import { Orientation, SeatStatus } from '../../../types/types';
+import { Deck, Orientation, SeatStatus } from '../../../types/types';
+import { ReservationContext } from '../ReservationProvider';
 
 type SeatProps = {
   x: number;
@@ -9,6 +10,8 @@ type SeatProps = {
   height?: number;
   orientation?: Orientation;
   status: SeatStatus;
+  seatNumber: string;
+  deck: Deck;
 };
 
 export const Seat: React.FC<SeatProps> = ({
@@ -18,7 +21,11 @@ export const Seat: React.FC<SeatProps> = ({
   height = 25,
   orientation = Orientation.HORIZONTAL,
   status,
+  seatNumber,
+  deck,
 }: SeatProps) => {
+  const context = useContext(ReservationContext);
+
   const w = orientation === Orientation.HORIZONTAL ? width : height;
   const h = orientation === Orientation.HORIZONTAL ? height : width;
   const color = () => {
@@ -41,6 +48,14 @@ export const Seat: React.FC<SeatProps> = ({
     }
   };
 
+  const onClick = () => {
+    if (status === SeatStatus.AVAILABLE) {
+      context?.updateSeatStatus(deck, seatNumber, SeatStatus.SELECTED);
+    }
+    if (status === SeatStatus.SELECTED)
+      context?.updateSeatStatus(deck, seatNumber, SeatStatus.AVAILABLE);
+  };
+
   return (
     <>
       <Rect
@@ -50,10 +65,7 @@ export const Seat: React.FC<SeatProps> = ({
         height={h}
         stroke="#a4a4a4"
         fill={color()}
-        onMouseEnter={(e) => {
-          if (status === SeatStatus.AVAILABLE)
-            console.log(e.target.getStage()?.getPointerPosition());
-        }}
+        onClick={onClick}
       />
       <Rect
         x={x + w * 0.7}
@@ -61,6 +73,7 @@ export const Seat: React.FC<SeatProps> = ({
         width={w * 0.2}
         height={h * 0.5}
         stroke="#a4a4a4"
+        onClick={onClick}
       />
     </>
   );

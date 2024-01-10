@@ -19,12 +19,17 @@ export interface Seat {
   status: SeatStatus;
 }
 
-export interface SeatMap {
+export interface ISeatMap {
   deck: Deck;
-  seats: Seat[];
-}
-
-export interface Bus {
-  hasUpperDeck?: boolean;
-  seatMap: SeatMap[];
+  seatSize: {
+    width: number;
+    height: number;
+  };
+  map: {
+    x: number;
+    y: number;
+    orientation: Orientation;
+    seatNumber: string;
+    status: SeatStatus;
+  }[];
 }
