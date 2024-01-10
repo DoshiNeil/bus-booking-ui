@@ -10,12 +10,10 @@
     display: flex;
     flex: 2;
     flex-direction: column;
-    gap:0.75rem;
 }
 
 .infoText{
     display: flex;
-    justify-content: center;
     align-items: center;
     span {
         width:auto;      
@@ -23,6 +21,7 @@
         font-weight: 400;
         font-size: smaller;
         padding:3px 20px;
+        margin-left: 10%;
     }
 }
 

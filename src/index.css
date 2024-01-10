@@ -22,7 +22,6 @@
 }
 
 body {
-	line-height: 1.5;
 	min-height: 100vh;
 	font-family: "Be Vietnam Pro", sans-serif;
 	background-color: var(--c-gray-800);

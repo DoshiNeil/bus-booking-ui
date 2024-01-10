@@ -2,6 +2,7 @@ import React from 'react';
 import style from './reservation.module.css';
 import SeatMap from './SeatMap';
 import Legends from './Legends';
+import { Deck } from '../../types/types';
 
 export const Reservation: React.FC = () => {
   return (
@@ -15,7 +16,7 @@ export const Reservation: React.FC = () => {
         <h3>Lower Deck</h3>
         <SeatMap />
         <h3>Upper Deck</h3>
-        <SeatMap />
+        <SeatMap deck={Deck.UPPER} />
       </div>
       <div className={style.legends}>
         <h3>Seat Legends </h3>
