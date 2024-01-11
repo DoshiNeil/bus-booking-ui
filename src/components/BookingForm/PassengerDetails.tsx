@@ -24,6 +24,7 @@ export const PassengerDetails: React.FC<PassengerDetailsProps> = ({
           id="seatNumber"
           disabled
           className={style.seatNumberStyle}
+          value={seatNumber}
         />
         <input type="text" id="firstName" placeholder="First Name" required />
         <input type="text" id="lastname" placeholder="Last Name" required />

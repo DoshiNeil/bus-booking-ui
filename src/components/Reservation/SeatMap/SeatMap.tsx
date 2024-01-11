@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layer, Rect, Stage } from 'react-konva';
 import { Seat } from './Seat';
 import { SteeringWheel } from './SteeringWheel';

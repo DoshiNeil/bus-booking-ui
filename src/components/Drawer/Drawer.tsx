@@ -8,6 +8,7 @@ type DrawerProps = {
 };
 
 // writing a simple debounce fn to re-render the sidebar on window resize
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const debounce = <F extends (...args: any[]) => any>(
   func: F,
   waitFor: number,
@@ -49,7 +50,8 @@ export const Drawer: React.FC<DrawerProps> = ({
 
   const props = useSpring({
     left: show ? windowDims.w - 500 : windowDims.w,
-    position: 'absolute' as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    position: 'absolute' as any, // temporary fix until the types on the konva lib are fixed
     backgroundColor: '#a6a6a6',
     width: '500px',
     height: '50rem',
