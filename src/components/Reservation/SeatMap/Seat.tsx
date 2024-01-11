@@ -1,5 +1,5 @@
-import React, { useCallback, useContext } from 'react';
-import { Rect } from 'react-konva';
+import React, { useContext } from 'react';
+import { Group, Rect, Text } from 'react-konva';
 import { Deck, Orientation, SeatStatus } from '../../../types/types';
 import { ReservationContext } from '../ReservationProvider';
 
@@ -57,24 +57,25 @@ export const Seat: React.FC<SeatProps> = ({
   };
 
   return (
-    <>
-      <Rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        stroke="#a4a4a4"
-        fill={color()}
-        onClick={onClick}
-      />
+    <Group onClick={onClick}>
+      <Rect x={x} y={y} width={w} height={h} stroke="#a4a4a4" fill={color()} />
       <Rect
         x={x + w * 0.7}
         y={y + h * 0.25}
         width={w * 0.2}
         height={h * 0.5}
         stroke="#a4a4a4"
-        onClick={onClick}
       />
-    </>
+      {status === SeatStatus.SELECTED && (
+        <Text
+          x={x + width * 0.1}
+          y={y + height / 2}
+          stroke="white"
+          text={seatNumber}
+          fontSize={12}
+          strokeWidth={1}
+        />
+      )}
+    </Group>
   );
 };
