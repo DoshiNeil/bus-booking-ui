@@ -1,11 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import style from './reservation.module.css';
 import SeatMap from './SeatMap';
 import Legends from './Legends';
 import { ReservationContext } from './ReservationProvider';
+import Drawer from '../Drawer';
+import { SeatStatus } from '../../types/types';
 
 export const Reservation: React.FC = () => {
   const context = useContext(ReservationContext);
+
+  const showDrawer: boolean = useMemo(() => {
+    let areSeatsSelected = false;
+    if (context?.seatMap) {
+      const selected = context.seatMap.map((m) =>
+        m.map.filter((s) => s.status === SeatStatus.SELECTED),
+      );
+      areSeatsSelected = selected.some((m) => m.length);
+    }
+    return areSeatsSelected;
+  }, [context?.seatMap]);
 
   return (
     <div className={style.reservationLayout}>
@@ -30,6 +43,7 @@ export const Reservation: React.FC = () => {
         <h3>Seat Legends </h3>
         <Legends />
       </div>
+      <Drawer show={showDrawer} />
     </div>
   );
 };
