@@ -1,15 +1,112 @@
-import React, { useContext, useMemo } from 'react';
-import { PassengerDetails } from './PassengerDetails';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { PassengerDetails, PassengerDetailsField } from './PassengerDetails';
 import style from './bookingForm.module.css';
 import { ReservationContext } from '../Reservation/ReservationProvider';
 import { SeatStatus } from '../../types/types';
+import { useNavigate } from 'react-router-dom';
+
+type BookingDetails = {
+  bookingDate: Date;
+  passengers: {
+    seatNumber: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  }[];
+};
 
 export const BookingForm: React.FC = () => {
-  const updateBookingDetails = (details: PassengerDetails) => {
-    return;
+  const context = useContext(ReservationContext);
+  const navigate = useNavigate();
+  const [details, updateDetails] = useState<BookingDetails>({
+    bookingDate: new Date(),
+    passengers: [],
+  });
+
+  const updateBookingDetails = (
+    value: string,
+    field: PassengerDetailsField,
+    seatNumber: string,
+  ) => {
+    updateDetails((prevDetails) => {
+      const newDetails = {
+        bookingDate: prevDetails.bookingDate,
+        passengers: [...prevDetails.passengers],
+      };
+
+      const p = newDetails.passengers.find((p) => p.seatNumber === seatNumber);
+      if (p) {
+        switch (field) {
+          case PassengerDetailsField.EMAIL:
+            p.email = value;
+            break;
+          case PassengerDetailsField.FIRST_NAME:
+            p.firstName = value;
+            break;
+          case PassengerDetailsField.LAST_NAME:
+            p.lastName = value;
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (field) {
+          case PassengerDetailsField.EMAIL:
+            newDetails.passengers.push({
+              seatNumber,
+              email: value,
+              lastName: '',
+              firstName: '',
+            });
+            break;
+          case PassengerDetailsField.FIRST_NAME:
+            newDetails.passengers.push({
+              seatNumber,
+              email: '',
+              lastName: '',
+              firstName: value,
+            });
+            break;
+          case PassengerDetailsField.LAST_NAME:
+            newDetails.passengers.push({
+              seatNumber,
+              email: '',
+              lastName: value,
+              firstName: '',
+            });
+            break;
+          default:
+            break;
+        }
+      }
+      return newDetails;
+    });
   };
 
-  const context = useContext(ReservationContext);
+  const onSave = () => {
+    if (selectedSeats) {
+      const seats = selectedSeats.map((s) => s.seatNumber);
+      const passengersDetailsSeats = details.passengers.map(
+        (s) => s.seatNumber,
+      );
+      // final list of seats
+      const _s = passengersDetailsSeats.filter((s) => seats.includes(s));
+      //final list of passengers
+      const passengers = details.passengers.filter((s) =>
+        _s.includes(s.seatNumber),
+      );
+      if (
+        confirm(
+          `Selected seats ${JSON.stringify(
+            _s,
+          )}, shall we confirm the booking ?`,
+        )
+      ) {
+        console.table(passengers);
+        navigate('dashboard');
+      }
+    }
+  };
 
   const selectedSeats = useMemo(() => {
     let seats = [];
@@ -17,19 +114,14 @@ export const BookingForm: React.FC = () => {
       seats = context.seatMap
         .map((m) => m.map.filter((s) => s.status === SeatStatus.SELECTED)) // filtering the selected seats
         .reduce((prev, curr) => prev.concat(curr)); // flattening the 2d to 1d array
-      console.log("Selected seats",seats);
       return seats;
     }
   }, [context?.seatMap]);
 
   return (
     <div className={style.bookingFormLayout}>
-      <h4>Booking Details</h4>
+      <h4 className={style.formTitle}>Booking Details</h4>
       <div className={style.rows}>
-        <div className={style.bookingDate}>
-          <label>Booking Date</label>
-          <input type="date" name="booking date" id="bookingDate" />
-        </div>
         {selectedSeats &&
           selectedSeats.map((s) => (
             <PassengerDetails
@@ -38,6 +130,11 @@ export const BookingForm: React.FC = () => {
               updateSeatDetails={updateBookingDetails}
             />
           ))}
+        <div className={style.actionRow}>
+          <button className={style.btn} onClick={onSave}>
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );

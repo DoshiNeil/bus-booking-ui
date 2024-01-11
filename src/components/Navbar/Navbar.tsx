@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import logo from '!file-loader!../../bus_logo.svg';
 import style from './navbar.module.css';
 import { TbCaretDownFilled } from 'react-icons/tb';
@@ -10,8 +10,6 @@ export const Navbar: React.FC = () => {
   const currentPage = location.pathname.split('/')[1];
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
     navigate(e.target.value);
-
-  useEffect(() => console.log(location));
 
   return (
     <div className={style.navbar}>

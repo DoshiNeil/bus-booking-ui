@@ -5,10 +5,23 @@ flex-direction: column;
 padding: .75rem;
 }
 
+
+.formTitle{
+    font-size: 1.5rem;
+    font-weight: 400;;
+}
+
 .rows{
     display: flex;
     gap:.5rem;
     flex-direction: column;
+}
+
+.actionRow{
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .bookingDate{
@@ -58,4 +71,22 @@ input:focus {
 input[disabled] {
     background-color: var(--c-gray-500); 
     pointer-events: none;
+}
+
+.btn {
+	border-radius: 3px;
+	background-color: var(--c-gray-700);
+    padding: .35rem .75rem;
+    left:0;
+    width:fit-content;
+    font-size: 1rem;
+    font-weight: 300;
+	border: 0;
+	color: var(--c-text-secondary);
+	transition: 0.25s ease;
+	cursor: pointer;
+	&:hover,
+	&:focus {
+		background-color: var(--c-gray-600);
+	}
 }

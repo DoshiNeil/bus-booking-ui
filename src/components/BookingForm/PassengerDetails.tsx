@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './bookingForm.module.css';
 
-export type PassengerDetails = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  dateOfBooking: string;
-};
+export enum PassengerDetailsField {
+  FIRST_NAME,
+  LAST_NAME,
+  EMAIL,
+}
 
 type PassengerDetailsProps = {
   seatNumber: string;
-  updateSeatDetails: (details: PassengerDetails) => void;
+  updateSeatDetails: (
+    value: string,
+    field: PassengerDetailsField,
+    seatNumber: string,
+  ) => void;
 };
 export const PassengerDetails: React.FC<PassengerDetailsProps> = ({
   seatNumber,
@@ -26,11 +29,47 @@ export const PassengerDetails: React.FC<PassengerDetailsProps> = ({
           className={style.seatNumberStyle}
           value={seatNumber}
         />
-        <input type="text" id="firstName" placeholder="First Name" required />
-        <input type="text" id="lastname" placeholder="Last Name" required />
+        <input
+          type="text"
+          id="firstName"
+          placeholder="First Name"
+          required
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            updateSeatDetails(
+              e.target.value,
+              PassengerDetailsField.FIRST_NAME,
+              seatNumber,
+            )
+          }
+        />
+        <input
+          type="text"
+          id="lastName"
+          placeholder="Last Name"
+          required
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            updateSeatDetails(
+              e.target.value,
+              PassengerDetailsField.LAST_NAME,
+              seatNumber,
+            )
+          }
+        />
       </div>
       <div>
-        <input type="email" id="email" placeholder="Email" required />
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          required
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            updateSeatDetails(
+              e.target.value,
+              PassengerDetailsField.EMAIL,
+              seatNumber,
+            )
+          }
+        />
       </div>
     </div>
   );
