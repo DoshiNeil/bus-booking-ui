@@ -103,7 +103,7 @@ export const BookingForm: React.FC = () => {
         )
       ) {
         console.table(passengers);
-        navigate('dashboard');
+        navigate('/dashboard');
       }
     }
   };
@@ -118,6 +118,27 @@ export const BookingForm: React.FC = () => {
     }
   }, [context?.seatMap]);
 
+  const isFormValid = useMemo(() => {
+    const isFormValid = true;
+    if (details.passengers.length === 0) {
+      return false;
+    }
+    details.passengers.forEach((p) => {
+      if (
+        p.firstName.trim().length === 0 ||
+        p.lastName.trim().length === 0 ||
+        p.email.trim().length === 0
+      ) {
+        return false;
+      }
+    });
+    return isFormValid;
+  }, [details.passengers]);
+
+  useEffect(() => {
+    console.log('Is form valid', isFormValid);
+  }, [isFormValid]);
+
   return (
     <div className={style.bookingFormLayout}>
       <h4 className={style.formTitle}>Booking Details</h4>
@@ -131,7 +152,11 @@ export const BookingForm: React.FC = () => {
             />
           ))}
         <div className={style.actionRow}>
-          <button className={style.btn} onClick={onSave}>
+          <button
+            className={style.btn}
+            onClick={onSave}
+            disabled={!isFormValid}
+          >
             Save
           </button>
         </div>
