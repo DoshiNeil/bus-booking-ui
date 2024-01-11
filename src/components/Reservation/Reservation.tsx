@@ -5,6 +5,7 @@ import Legends from './Legends';
 import { ReservationContext } from './ReservationProvider';
 import Drawer from '../Drawer';
 import { SeatStatus } from '../../types/types';
+import BookingForm from '../BookingForm';
 
 export const Reservation: React.FC = () => {
   const context = useContext(ReservationContext);
@@ -43,7 +44,9 @@ export const Reservation: React.FC = () => {
         <h3>Seat Legends </h3>
         <Legends />
       </div>
-      <Drawer show={showDrawer} />
+      <Drawer show={showDrawer}>
+        <BookingForm />
+      </Drawer>
     </div>
   );
 };

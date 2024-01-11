@@ -4,6 +4,7 @@ import style from './drawer.module.css';
 
 type DrawerProps = {
   show: boolean;
+  children: React.ReactNode | JSX.Element | JSX.Element[];
 };
 
 // writing a simple debounce fn to re-render the sidebar on window resize
@@ -24,7 +25,10 @@ const debounce = <F extends (...args: any[]) => any>(
   return debounced as (...args: Parameters<F>) => ReturnType<F>;
 };
 
-export const Drawer: React.FC<DrawerProps> = ({ show }: DrawerProps) => {
+export const Drawer: React.FC<DrawerProps> = ({
+  show,
+  children,
+}: DrawerProps) => {
   const [windowDims, setWindowDims] = useState<{ w: number; h: number }>({
     w: window.innerWidth,
     h: innerHeight,
@@ -49,13 +53,13 @@ export const Drawer: React.FC<DrawerProps> = ({ show }: DrawerProps) => {
     backgroundColor: '#a6a6a6',
     width: '500px',
     height: '50rem',
-    marginTop: '-.75rem',
-    borderRadius: '8px',
+    borderTopLeftRadius: '4px',
+    borderBottomLeftRadius: '4px',
   });
 
   return (
     <animated.div style={props}>
-      <div className={style.drawer}> Animated drawer! </div>
+      <div className={style.drawer}>{children}</div>
     </animated.div>
   );
 };

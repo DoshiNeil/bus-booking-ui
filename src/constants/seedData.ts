@@ -87,7 +87,7 @@ export const seatMap = [
         y: 14 + 3.3 * 34,
         orientation: Orientation.HORIZONTAL,
         seatNumber: '12 L',
-        status: SeatStatus.AVAILABLE,
+        status: SeatStatus.UNAVAILABLE,
       },
       {
         x: 80 + 65 * 4.4,
@@ -221,13 +221,12 @@ export const seatMap = [
         seatNumber: '30 U',
         status: SeatStatus.AVAILABLE,
       },
-
       {
-        x: 80 * 65 * 3.3,
+        x: 80 * 65 * 1.3,
         y: 34 + 3.3 * 34,
         orientation: Orientation.HORIZONTAL,
         seatNumber: '31 U',
-        status: SeatStatus.FEMALE_ONLY,
+        status: SeatStatus.AVAILABLE,
       },
       {
         x: 80 + 65 * 4.4,

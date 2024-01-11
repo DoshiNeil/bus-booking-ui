@@ -6,8 +6,8 @@ import { ReservationContext } from '../ReservationProvider';
 type SeatProps = {
   x: number;
   y: number;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
   orientation?: Orientation;
   status: SeatStatus;
   seatNumber: string;
@@ -17,8 +17,8 @@ type SeatProps = {
 export const Seat: React.FC<SeatProps> = ({
   x,
   y,
-  width = 40,
-  height = 25,
+  width,
+  height,
   orientation = Orientation.HORIZONTAL,
   status,
   seatNumber,

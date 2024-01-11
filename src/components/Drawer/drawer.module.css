@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    color: white;
+    color:black;
     font-size: 25px;
-    padding-top: 20px;
+    padding: 1rem;
   }
   
