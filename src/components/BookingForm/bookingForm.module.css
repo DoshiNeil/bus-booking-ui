@@ -64,6 +64,11 @@ input {
     background-color: transparent;
     padding-left:.5rem;
 }
+
+input:valid {
+    border-bottom: 2px solid green;
+}
+
 input:focus {
     outline:none;
     border-bottom: 2px solid var(--c-gray-600);
