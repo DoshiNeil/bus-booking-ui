@@ -14,6 +14,11 @@ export enum SeatStatus {
   FEMALE_ONLY,
 }
 
+export enum RowMode {
+  EDIT,
+  READ_ONLY,
+}
+
 export interface Seat {
   number: string;
   status: SeatStatus;

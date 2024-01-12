@@ -1,0 +1,26 @@
+.seatNumberStyle{
+    width: 3rem;
+}
+
+.tdStyle{
+    width:9.25rem;
+    overflow-x: scroll;
+    font-weight: 300;
+}
+
+.inputStyle{
+    color:white;
+    max-width:9.25rem;
+    overflow-x: hidden;
+    font-size: 0.9rem;
+}
+
+.btnGroup{
+    display: flex;
+    gap:.35rem
+}
+
+button:hover {
+    color: black;
+    background-color: #45ffbc;
+}

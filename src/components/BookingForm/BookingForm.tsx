@@ -167,11 +167,7 @@ export const BookingForm: React.FC = () => {
           />
         ))}
         <div className={style.actionRow}>
-          <button
-            className={style.btn}
-            onClick={onSave}
-            disabled={!isFormValid}
-          >
+          <button onClick={onSave} disabled={!isFormValid}>
             Save
           </button>
         </div>

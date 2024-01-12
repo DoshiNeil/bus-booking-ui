@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './table.module.css';
 import { samplePassengerDetails } from '../../constants/seedData';
+import { Row } from './Row';
 
 export const Table: React.FC = () => {
   const bookingDate = samplePassengerDetails.bookingDate;
@@ -16,17 +17,14 @@ export const Table: React.FC = () => {
           <th>Booking Date</th>
         </thead>
         {samplePassengerDetails.passengers.map((p) => (
-          <tr key={`${bookingDate}--${p.seatNumber}`}>
-            <td>{p.seatNumber}</td>
-            <td>{p.firstName}</td>
-            <td>{p.lastName}</td>
-            <td>{p.email}</td>
-            <td>{bookingDate.toISOString()}</td>
-            <td>
-              <button>Edit</button>
-              <button>Cancel</button>
-            </td>
-          </tr>
+          <Row
+            key={`${bookingDate}-${p.seatNumber}`}
+            bookingDate={bookingDate}
+            seatNumber={p.seatNumber}
+            firstName={p.firstName}
+            lastName={p.lastName}
+            email={p.email}
+          />
         ))}
       </table>
     </div>
