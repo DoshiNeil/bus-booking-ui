@@ -1,5 +1,11 @@
 import React from 'react';
+import style from './dashboard.module.css';
+import Table from '../Table';
 
 export const Dashboard: React.FC = () => {
-  return <h1>Dashboard</h1>;
+  return (
+    <div className={style.dashboardLayout}>
+      <Table />
+    </div>
+  );
 };

@@ -53,3 +53,19 @@ textarea {
 a {
 	color: inherit;
 }
+
+table{
+    padding: .5rem;
+    margin-bottom: 1rem;
+	border-collapse: collapse;
+}
+
+td, th, thead{
+	text-align: left;
+	padding:.5rem;	
+	border-bottom: 1px solid #fefefe; 
+}
+
+tr:hover{
+	background-color: var(--c-gray-500);
+}

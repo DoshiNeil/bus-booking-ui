@@ -280,3 +280,27 @@ export const seatMap = [
     ],
   },
 ];
+
+export const samplePassengerDetails = {
+  bookingDate: new Date(),
+  passengers: [
+    {
+      seatNumber: '31 U',
+      firstName: 'Neil',
+      lastName: 'Doshi',
+      email: 'neil@gmail.com',
+    },
+    {
+      seatNumber: '30 U',
+      firstName: 'Parth',
+      lastName: 'Doshi',
+      email: 'neil@gmail.com',
+    },
+    {
+      seatNumber: '31 U',
+      firstName: 'Gajal',
+      lastName: 'Jain',
+      email: 'gajal@gmail.com',
+    },
+  ],
+};
