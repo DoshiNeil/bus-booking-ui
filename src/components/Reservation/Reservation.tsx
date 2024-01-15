@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import style from './reservation.module.css';
 import SeatMap from './SeatMap';
 import Legends from './Legends';
@@ -8,19 +8,16 @@ import { SeatStatus } from '../../types/types';
 import BookingForm from '../BookingForm';
 
 export const Reservation: React.FC = () => {
-  const { seatMap, resetSelection } = useContext(ReservationContext);
+  const { seatMap } = useContext(ReservationContext);
 
   const showDrawer: boolean = useMemo(() => {
     let areSeatsSelected = false;
-    console.info(seatMap);
     const selected = seatMap.map((d) =>
       d.map.filter((s) => s.status === SeatStatus.SELECTED),
     );
     areSeatsSelected = selected.some((m) => m.length);
     return areSeatsSelected;
   }, [seatMap]);
-
-  useEffect(() => resetSelection(), []);
 
   return (
     <div className={style.reservationLayout}>

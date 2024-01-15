@@ -71,7 +71,6 @@ export const BookingForm: React.FC = () => {
   };
 
   const selectedSeats = useMemo(() => {
-    console.log('calculate selected seats');
     let seats = [];
     seats = seatMap
       // filtering the selected seats

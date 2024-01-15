@@ -1,0 +1,46 @@
+.legends{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.legend{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .5rem;
+}
+
+.legendColor{
+    width:1rem;
+    height:1rem;
+    border-radius:2px;
+}
+
+.femaleOnly{
+    background-color: #d84e55;
+    border: #010 1px solid;
+
+}
+
+.unavailable{
+    background-color: #c3c3c3;
+    border: #010 1px solid;;
+}
+
+.available{
+    background-color: #fefefe;
+    border: #010 1px solid;;
+}
+
+.selected {
+    background-color: #040404;
+    border: #fff 1px solid;   
+}
+
+.legends h4{
+    font-weight: 400;
+    margin: .5rem;
+}

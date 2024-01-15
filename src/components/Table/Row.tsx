@@ -98,7 +98,6 @@ export const Row: React.FC<RowProps> = ({
           booking,
         ],
       });
-      window.dispatchEvent(new Event('storage'));
       setIsEditMode(false);
       reset();
     }
@@ -115,7 +114,6 @@ export const Row: React.FC<RowProps> = ({
           (s) => s.seatNumber !== seatNumber,
         ),
       });
-      window.dispatchEvent(new Event('storage'));
     }
   };
 

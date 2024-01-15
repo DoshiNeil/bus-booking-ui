@@ -25,4 +25,5 @@ export function setLocalStorageItem<T extends keyof LocalStorageSchema>(
   value: LocalStorageSchema[T],
 ) {
   localStorage.setItem(key, JSON.stringify(value));
+  window.dispatchEvent(new Event('storage'));
 }

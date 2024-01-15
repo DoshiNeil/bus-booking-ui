@@ -10,7 +10,6 @@ type ReservationContextType = {
     seatNumber: string,
     status: SeatStatus,
   ) => void;
-  resetSelection: () => void;
 };
 
 // fn to generate the seatMap based on bookings
@@ -28,7 +27,6 @@ const getSeatMap = (): ISeatMap[] => {
         ? { ...s, status: SeatStatus.UNAVAILABLE }
         : s;
     });
-    console.log({ ...d, map: updatedSeats });
     return { ...d, map: updatedSeats };
   }) as unknown as ISeatMap[];
 };
@@ -36,9 +34,6 @@ const getSeatMap = (): ISeatMap[] => {
 export const ReservationContext = createContext<ReservationContextType>({
   seatMap: [],
   updateSeatStatus: () => {
-    return;
-  },
-  resetSelection: () => {
     return;
   },
 });
@@ -72,16 +67,11 @@ export const ReservationContextProvider: React.FC<
     });
   };
 
-  const resetSelection = () => {
-    setSeatMap(getSeatMap());
-  };
-
   return (
     <ReservationContext.Provider
       value={{
         seatMap,
         updateSeatStatus,
-        resetSelection,
       }}
     >
       {children}

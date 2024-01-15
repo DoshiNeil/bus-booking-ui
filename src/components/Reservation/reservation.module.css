@@ -21,7 +21,7 @@
         font-weight: 400;
         font-size: smaller;
         padding:3px 20px;
-        margin-left: 10%;
+        margin-left: 15%;
     }
 }
 
@@ -31,7 +31,7 @@
 
 .legends {
     display: flex;
-    flex:1;
+    flex:2;
     flex-direction: column;
     @media (max-width: 1024px) {
 		display: none;
