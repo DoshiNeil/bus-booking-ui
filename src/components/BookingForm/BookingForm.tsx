@@ -4,37 +4,22 @@ import style from './bookingForm.module.css';
 import { ReservationContext } from '../Reservation/ReservationProvider';
 import { SeatStatus } from '../../types/types';
 import { useNavigate } from 'react-router-dom';
-
-type BookingDetails = {
-  bookingDate: Date;
-  passengers: {
-    seatNumber: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  }[];
-};
+import { Bookings, setLocalStorageItem } from '../../utils/TypedLocalStorage';
 
 export const BookingForm: React.FC = () => {
-  const { seatMap, resetSelection } = useContext(ReservationContext);
+  const { seatMap } = useContext(ReservationContext);
   const navigate = useNavigate();
-  const [details, updateDetails] = useState<BookingDetails>({
-    bookingDate: new Date(),
-    passengers: [],
-  });
+  const [details, updateDetails] = useState<Bookings[]>([]);
 
   const updateBookingDetails = (
     value: string,
     field: PassengerDetailsField,
     seatNumber: string,
   ) => {
-    updateDetails((prevDetails) => {
-      const newDetails = {
-        bookingDate: prevDetails.bookingDate,
-        passengers: [...prevDetails.passengers],
-      };
+    updateDetails((prevDetails: Bookings[]) => {
+      const newDetails = [...prevDetails];
 
-      const p = newDetails.passengers.find((p) => p.seatNumber === seatNumber);
+      const p = newDetails.find((p) => p.seatNumber === seatNumber);
       if (p) {
         switch (field) {
           case PassengerDetailsField.EMAIL:
@@ -54,12 +39,10 @@ export const BookingForm: React.FC = () => {
     });
   };
 
-  const passengers = details.passengers;
-
   const onSave = () => {
     // validate emails and check the syntax if incorrect
     const emailPattern = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    const areEmailsValid = passengers
+    const areEmailsValid = details
       .map((p) => !!p.email.match(emailPattern))
       .reduce((prev, curr) => prev && curr);
 
@@ -72,8 +55,7 @@ export const BookingForm: React.FC = () => {
         )}, shall we confirm the booking ?`,
       )
     ) {
-      localStorage.setItem('passenger-details', JSON.stringify(details));
-      resetSelection();
+      setLocalStorageItem('bookings', { bookings: details });
       navigate('/dashboard');
     }
   };
@@ -93,38 +75,34 @@ export const BookingForm: React.FC = () => {
 
   // add / remove passenger on seat selection / de-selection
   useEffect(() => {
-    updateDetails((prevDetails: BookingDetails) => {
-      const newDetails: BookingDetails = {
-        bookingDate: prevDetails.bookingDate,
-        passengers: [...prevDetails.passengers],
-      };
-
-      const passengers = newDetails.passengers;
+    updateDetails((prevDetails: Bookings[]) => {
+      const newDetails: Bookings[] = [...prevDetails];
 
       //seats to add
       const newSelectedSeats = selectedSeats?.filter(
-        (s) => !newDetails.passengers.map((s) => s.seatNumber).includes(s),
+        (s) => !newDetails.map((s) => s.seatNumber).includes(s),
       );
       if (newSelectedSeats?.length !== 0) {
         newSelectedSeats?.forEach((s) =>
-          passengers.push({
+          newDetails.push({
             seatNumber: s,
             lastName: '',
             firstName: '',
             email: '',
+            travelDate: new Date(),
           }),
         );
         return newDetails;
       }
 
       //seats to remove
-      const deSelectedSeats = passengers.filter(
+      const deSelectedSeats = newDetails.filter(
         (s) => !selectedSeats?.includes(s.seatNumber),
       );
       if (deSelectedSeats?.length !== 0) {
         deSelectedSeats?.forEach((s) => {
-          passengers.splice(
-            passengers.findIndex((p) => p.seatNumber === s.seatNumber),
+          newDetails.splice(
+            newDetails.findIndex((p) => p.seatNumber === s.seatNumber),
             1,
           );
         });
@@ -135,10 +113,10 @@ export const BookingForm: React.FC = () => {
 
   const isFormValid = useMemo(() => {
     let isFormValid = true;
-    if (passengers.length === 0) {
+    if (details.length === 0) {
       return false;
     }
-    passengers.forEach((p) => {
+    details.forEach((p) => {
       if (
         p.firstName.trim().length === 0 ||
         p.lastName.trim().length === 0 ||
@@ -148,13 +126,13 @@ export const BookingForm: React.FC = () => {
       }
     });
     return isFormValid;
-  }, [passengers]);
+  }, [details]);
 
   return (
     <div className={style.bookingFormLayout}>
       <h4 className={style.formTitle}>Booking Details</h4>
       <form className={style.rows}>
-        {passengers.map((s) => (
+        {details.map((s) => (
           <PassengerDetails
             seatNumber={s.seatNumber}
             key={s.seatNumber}

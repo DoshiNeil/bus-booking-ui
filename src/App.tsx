@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import Reservation from './components/Reservation';
 import RootLayout from './components/RootLayout';
 import { ReservationContextProvider } from './components/Reservation/ReservationProvider';
+
 function App() {
   return (
     <BrowserRouter>

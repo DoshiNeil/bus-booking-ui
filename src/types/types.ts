@@ -19,18 +19,6 @@ export enum RowMode {
   READ_ONLY,
 }
 
-export enum LocalStorageKey {
-  BOOKINGS = 'bookings',
-}
-
-export type Bookings = {
-  travelDate: Date;
-  seatNumber: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-};
-
 export interface Seat {
   number: string;
   status: SeatStatus;

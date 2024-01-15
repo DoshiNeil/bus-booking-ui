@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { seatMap as defaultMap } from '../../constants/seedData';
 import { Deck, ISeatMap, SeatStatus } from '../../types/types';
+import { getLocalStorageItem } from '../../utils/TypedLocalStorage';
 
 type ReservationContextType = {
   seatMap: ISeatMap[];
@@ -10,6 +11,26 @@ type ReservationContextType = {
     status: SeatStatus,
   ) => void;
   resetSelection: () => void;
+};
+
+// fn to generate the seatMap based on bookings
+const getSeatMap = (): ISeatMap[] => {
+  const bookings = getLocalStorageItem('bookings');
+
+  if (!bookings.bookings) return defaultMap;
+
+  const bookedSeats: string[] = bookings.bookings.map((b) => b.seatNumber);
+
+  // updating the seat statuses as per bookings confirmed
+  return defaultMap.map((d) => {
+    const updatedSeats = d.map.map((s) => {
+      return bookedSeats.includes(s.seatNumber)
+        ? { ...s, status: SeatStatus.UNAVAILABLE }
+        : s;
+    });
+    console.log({ ...d, map: updatedSeats });
+    return { ...d, map: updatedSeats };
+  }) as unknown as ISeatMap[];
 };
 
 export const ReservationContext = createContext<ReservationContextType>({
@@ -29,7 +50,8 @@ type ReservationContextProviderType = {
 export const ReservationContextProvider: React.FC<
   ReservationContextProviderType
 > = ({ children }: ReservationContextProviderType) => {
-  const [seatMap, setSeatMap] = useState<ISeatMap[]>(defaultMap);
+  const [seatMap, setSeatMap] = useState<ISeatMap[]>(getSeatMap());
+
   const updateSeatStatus = (
     deck: Deck,
     seatNumber: string,
@@ -51,13 +73,16 @@ export const ReservationContextProvider: React.FC<
   };
 
   const resetSelection = () => {
-    console.log('resetting the seat map to seed data');
-    setSeatMap(defaultMap);
+    setSeatMap(getSeatMap());
   };
 
   return (
     <ReservationContext.Provider
-      value={{ seatMap, updateSeatStatus, resetSelection }}
+      value={{
+        seatMap,
+        updateSeatStatus,
+        resetSelection,
+      }}
     >
       {children}
     </ReservationContext.Provider>
