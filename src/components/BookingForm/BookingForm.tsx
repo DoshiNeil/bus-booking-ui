@@ -4,7 +4,11 @@ import style from './bookingForm.module.css';
 import { ReservationContext } from '../Reservation/ReservationProvider';
 import { SeatStatus } from '../../types/types';
 import { useNavigate } from 'react-router-dom';
-import { Bookings, setLocalStorageItem } from '../../utils/TypedLocalStorage';
+import {
+  Bookings,
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from '../../utils/TypedLocalStorage';
 
 export const BookingForm: React.FC = () => {
   const { seatMap } = useContext(ReservationContext);
@@ -55,7 +59,13 @@ export const BookingForm: React.FC = () => {
         )}, shall we confirm the booking ?`,
       )
     ) {
-      setLocalStorageItem('bookings', { bookings: details });
+      const { bookings } = getLocalStorageItem('bookings');
+      setLocalStorageItem(
+        'bookings',
+        bookings
+          ? { bookings: [...bookings, ...details] }
+          : { bookings: details },
+      );
       navigate('/dashboard');
     }
   };

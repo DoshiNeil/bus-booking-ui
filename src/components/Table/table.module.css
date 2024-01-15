@@ -24,3 +24,19 @@ button:hover {
     color: black;
     background-color: #45ffbc;
 }
+
+button a {
+    text-decoration: none;
+}
+
+.btnCancel  {
+    &:hover {
+        background-color:#ff4588 ;
+    }
+}
+
+.btnDelete  {
+    &:hover {
+        background-color:#f73542 ;
+    }
+}
