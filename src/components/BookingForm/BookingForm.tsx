@@ -9,6 +9,7 @@ import {
   getLocalStorageItem,
   setLocalStorageItem,
 } from '../../utils/TypedLocalStorage';
+import { emailPattern } from '../../constants/constants';
 
 export const BookingForm: React.FC = () => {
   const { seatMap } = useContext(ReservationContext);
@@ -45,7 +46,6 @@ export const BookingForm: React.FC = () => {
 
   const onSave = () => {
     // validate emails and check the syntax if incorrect
-    const emailPattern = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     const areEmailsValid = details
       .map((p) => !!p.email.match(emailPattern))
       .reduce((prev, curr) => prev && curr);

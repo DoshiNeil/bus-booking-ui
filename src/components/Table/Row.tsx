@@ -13,6 +13,7 @@ import {
   getLocalStorageItem,
   setLocalStorageItem,
 } from '../../utils/TypedLocalStorage';
+import { emailPattern } from '../../constants/constants';
 
 type RowProps = {
   bookingDate: Date;
@@ -82,7 +83,6 @@ export const Row: React.FC<RowProps> = ({
 
   const onSave = () => {
     // validate emails and check the syntax if incorrect
-    const emailPattern = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     const isEmailValid = booking.email.match(emailPattern);
 
     if (!isEmailValid) {
