@@ -8,18 +8,16 @@ import { SeatStatus } from '../../types/types';
 import BookingForm from '../BookingForm';
 
 export const Reservation: React.FC = () => {
-  const context = useContext(ReservationContext);
+  const { seatMap } = useContext(ReservationContext);
 
   const showDrawer: boolean = useMemo(() => {
     let areSeatsSelected = false;
-    if (context?.seatMap) {
-      const selected = context.seatMap.map((m) =>
-        m.map.filter((s) => s.status === SeatStatus.SELECTED),
-      );
-      areSeatsSelected = selected.some((m) => m.length);
-    }
+    const selected = seatMap.map((m) =>
+      m.map.filter((s) => s.status === SeatStatus.SELECTED),
+    );
+    areSeatsSelected = selected.some((m) => m.length);
     return areSeatsSelected;
-  }, [context?.seatMap]);
+  }, [seatMap]);
 
   return (
     <div className={style.reservationLayout}>
@@ -29,7 +27,7 @@ export const Reservation: React.FC = () => {
             Click on an available seat to proceed with your transaction
           </span>
         </div>
-        {context?.seatMap.map((floorPlan) => (
+        {seatMap.map((floorPlan) => (
           <div key={floorPlan.deck}>
             <h3 className={style.mapTitle}>{floorPlan.deck}</h3>
             <SeatMap

@@ -9,7 +9,7 @@ export const Navbar: React.FC = () => {
 
   const currentPage = location.pathname.split('/')[1];
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    navigate(e.target.value);
+    navigate(`/${e.target.value}`);
 
   return (
     <div className={style.navbar}>

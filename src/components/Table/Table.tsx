@@ -10,22 +10,26 @@ export const Table: React.FC = () => {
     <div>
       <table className={style.table}>
         <thead>
-          <th>Seat Number</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Booking Date</th>
+          <tr>
+            <th>Seat Number</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Booking Date</th>
+          </tr>
         </thead>
-        {samplePassengerDetails.passengers.map((p) => (
-          <Row
-            key={`${bookingDate}-${p.seatNumber}`}
-            bookingDate={bookingDate}
-            seatNumber={p.seatNumber}
-            firstName={p.firstName}
-            lastName={p.lastName}
-            email={p.email}
-          />
-        ))}
+        <tbody>
+          {samplePassengerDetails.passengers.map((p, idx) => (
+            <Row
+              key={idx}
+              bookingDate={bookingDate}
+              seatNumber={p.seatNumber}
+              firstName={p.firstName}
+              lastName={p.lastName}
+              email={p.email}
+            />
+          ))}
+        </tbody>
       </table>
     </div>
   );

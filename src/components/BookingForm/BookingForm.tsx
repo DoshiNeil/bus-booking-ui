@@ -16,7 +16,7 @@ type BookingDetails = {
 };
 
 export const BookingForm: React.FC = () => {
-  const context = useContext(ReservationContext);
+  const { seatMap, resetSelection } = useContext(ReservationContext);
   const navigate = useNavigate();
   const [details, updateDetails] = useState<BookingDetails>({
     bookingDate: new Date(),
@@ -56,7 +56,6 @@ export const BookingForm: React.FC = () => {
 
   const passengers = details.passengers;
 
-  // TODO
   const onSave = () => {
     // validate emails and check the syntax if incorrect
     const emailPattern = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -65,36 +64,32 @@ export const BookingForm: React.FC = () => {
       .reduce((prev, curr) => prev && curr);
 
     if (!areEmailsValid) {
-      alert('Please add valid emails');
-      return;
-    }
-
-    if (
+      alert('Please add valid email(s)');
+    } else if (
       confirm(
         `Selected seats ${JSON.stringify(
           selectedSeats,
         )}, shall we confirm the booking ?`,
       )
     ) {
-      // save the details to local storage
-      // reset the bus seat map
+      localStorage.setItem('passenger-details', JSON.stringify(details));
+      resetSelection();
       navigate('/dashboard');
     }
   };
 
   const selectedSeats = useMemo(() => {
+    console.log('calculate selected seats');
     let seats = [];
-    if (context?.seatMap) {
-      seats = context.seatMap
-        // filtering the selected seats
-        .map((m) => m.map.filter((s) => s.status === SeatStatus.SELECTED))
-        // flattening the 2d to 1d array
-        .reduce((prev, curr) => prev.concat(curr))
-        // need just the seat numbers
-        .map((s) => s.seatNumber);
-      return seats;
-    }
-  }, [context?.seatMap]);
+    seats = seatMap
+      // filtering the selected seats
+      .map((m) => m.map.filter((s) => s.status === SeatStatus.SELECTED))
+      // flattening the 2d to 1d array
+      .reduce((prev, curr) => prev.concat(curr))
+      // need just the seat numbers
+      .map((s) => s.seatNumber);
+    return seats;
+  }, [seatMap]);
 
   // add / remove passenger on seat selection / de-selection
   useEffect(() => {

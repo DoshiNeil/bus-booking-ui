@@ -9,11 +9,18 @@ type ReservationContextType = {
     seatNumber: string,
     status: SeatStatus,
   ) => void;
+  resetSelection: () => void;
 };
 
-export const ReservationContext = createContext<ReservationContextType | null>(
-  null,
-);
+export const ReservationContext = createContext<ReservationContextType>({
+  seatMap: [],
+  updateSeatStatus: () => {
+    return;
+  },
+  resetSelection: () => {
+    return;
+  },
+});
 
 type ReservationContextProviderType = {
   children: React.ReactNode | JSX.Element | JSX.Element[];
@@ -42,8 +49,16 @@ export const ReservationContextProvider: React.FC<
       return updatedMap;
     });
   };
+
+  const resetSelection = () => {
+    console.log('resetting the seat map to seed data');
+    setSeatMap(defaultMap);
+  };
+
   return (
-    <ReservationContext.Provider value={{ seatMap, updateSeatStatus }}>
+    <ReservationContext.Provider
+      value={{ seatMap, updateSeatStatus, resetSelection }}
+    >
       {children}
     </ReservationContext.Provider>
   );
