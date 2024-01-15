@@ -25,7 +25,9 @@ const getSeatMap = (): ISeatMap[] => {
     const updatedSeats = d.map.map((s) => {
       return bookedSeats.includes(s.seatNumber)
         ? { ...s, status: SeatStatus.UNAVAILABLE }
-        : s;
+        : s.status == SeatStatus.SELECTED
+          ? { ...s, status: SeatStatus.AVAILABLE }
+          : s;
     });
     return { ...d, map: updatedSeats };
   }) as unknown as ISeatMap[];
