@@ -24,9 +24,11 @@ const getSeatMap = (): ISeatMap[] => {
   return defaultMap.map((d) => {
     const updatedSeats = d.map.map((s) => {
       return bookedSeats.includes(s.seatNumber)
-        ? { ...s, status: SeatStatus.UNAVAILABLE }
+        ? // setting all the bookings to unavailable
+          { ...s, status: SeatStatus.UNAVAILABLE }
         : s.status == SeatStatus.SELECTED
-          ? { ...s, status: SeatStatus.AVAILABLE }
+          ? // removing transient state which the user might have left in between
+            { ...s, status: SeatStatus.AVAILABLE }
           : s;
     });
     return { ...d, map: updatedSeats };
