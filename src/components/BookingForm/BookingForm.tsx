@@ -54,9 +54,9 @@ export const BookingForm: React.FC = () => {
       alert('Please add valid email(s)');
     } else if (
       confirm(
-        `Selected seats ${JSON.stringify(
-          selectedSeats,
-        )}, shall we confirm the booking ?`,
+        `Selected seats ${selectedSeats.reduce(
+          (prev, curr) => `${prev}, ${curr}`,
+        )}. shall we confirm the booking ?`,
       )
     ) {
       const { bookings } = getLocalStorageItem('bookings');
