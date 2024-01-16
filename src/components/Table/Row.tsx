@@ -6,13 +6,14 @@ import {
   AiOutlineEdit,
 } from 'react-icons/ai';
 
-import style from './table.module.css';
 import { PassengerDetailsField } from '../BookingForm/PassengerDetails';
 import {
   Bookings,
   getLocalStorageItem,
   setLocalStorageItem,
 } from '../../utils/TypedLocalStorage';
+
+import style from './table.module.css';
 import { emailPattern } from '../../constants/constants';
 
 type RowProps = {
@@ -39,16 +40,6 @@ export const Row: React.FC<RowProps> = ({
     email,
     seatNumber,
   });
-
-  const reset = () => {
-    updateBooking({
-      travelDate: bookingDate,
-      firstName,
-      lastName,
-      email,
-      seatNumber,
-    });
-  };
 
   const updateBookingDetails = (
     value: string,
@@ -99,7 +90,13 @@ export const Row: React.FC<RowProps> = ({
         ],
       });
       setIsEditMode(false);
-      reset();
+      updateBooking({
+        travelDate: bookingDate,
+        firstName,
+        lastName,
+        email,
+        seatNumber,
+      });
     }
   };
 

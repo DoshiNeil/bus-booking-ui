@@ -140,7 +140,7 @@ export const BookingForm: React.FC = () => {
   return (
     <div className={style.bookingFormLayout}>
       <h4 className={style.formTitle}>Booking Details</h4>
-      <form className={style.rows}>
+      <div className={style.rows}>
         {details.map((s) => (
           <PassengerDetails
             seatNumber={s.seatNumber}
@@ -153,7 +153,7 @@ export const BookingForm: React.FC = () => {
             Save
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
