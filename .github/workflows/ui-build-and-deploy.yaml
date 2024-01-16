@@ -7,7 +7,7 @@ on:
       - main
 jobs:
   # To build the project
-  build-tambola:
+  build-ui:
     runs-on: ubuntu-latest
     steps:
       - name: Checking out code
@@ -28,4 +28,4 @@ jobs:
           aws-region: us-west-1
 
       - name: Deploy to S3 bucket
-        run: aws s3 sync ./dist/ s3://bus-booking-ui-fe --delete
+        run: aws s3 sync ./build/ s3://bus-booking-ui-fe --delete
