@@ -1,7 +1,7 @@
 # Bus Booking UI
 
 ![Deploy to S3]
-(https://github.com/DoshiNeil/bus-booking-ui/actions/workflows/ui-build-and-demo.yaml/badge.svg)
+(https://github.com/DoshiNeil/bus-booking-ui/actions/workflows/ui-build-and-demo.yaml/badge.svg?branch=main)
 
 ## Demo Url
 
@@ -15,7 +15,7 @@ This is a webapp build with react. The app has 2 routes
 - `/dashboard`
 
 Reservation route depicts the bus layout and allows the user to make bookings from here.
-On completion of the booking the user is router to Dashboard. Here the use can see the booking details.
+On completion of the booking the user is routed to Dashboard. Here the use can see the booking details.
 From the Dashboard, the user can
 
 - Delete a reservation
