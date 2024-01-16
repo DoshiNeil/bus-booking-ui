@@ -1,6 +1,11 @@
 # Bus Booking UI
 
-https://github.com/DoshiNeil/bus-booking-ui/actions/workflows/dev-build-and-deploy/badge.svg
+![Deploy to S3]
+(https://github.com/DoshiNeil/bus-booking-ui/actions/workflows/ui-build-and-demo.yaml/badge.svg)
+
+## Demo Url
+
+http://bus-booking-ui-fe.s3-website-us-east-1.amazonaws.com/
 
 ## Introduction
 
@@ -24,6 +29,7 @@ Any changes made on the Dashboard are reflected on the Reservation page and vice
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 For visual representation of the bus seat layout, have used a react wrapper over Canvas element.
 Since this being a demo app, the backend is mocked with LocalStorage. No styling library was used.
+Using github actions to deploy to S3 on push to main branch.
 
 ## Dependencies
 
