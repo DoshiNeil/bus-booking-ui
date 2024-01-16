@@ -26,7 +26,9 @@ export const Table: React.FC = () => {
         </button>
       )}
       {reservations && reservations.length == 0 && (
-        <Link to="/reservation">Reserve a Seat</Link>
+        <button>
+          <Link to="/reservation">Reserve a Seat</Link>
+        </button>
       )}
       {reservations && reservations.length !== 0 && (
         <table className={style.table}>

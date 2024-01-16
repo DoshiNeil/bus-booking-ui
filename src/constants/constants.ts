@@ -1,1 +1,1 @@
-export const emailPattern = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+export const emailPattern = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,8}$/g;
