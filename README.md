@@ -1,7 +1,6 @@
 # Bus Booking UI
 
-![Deploy to S3]
-(https://github.com/DoshiNeil/bus-booking-ui/actions/workflows/ui-build-and-demo.yaml/badge.svg?branch=main)
+[![dev-build-and-deploy](https://github.com/DoshiNeil/bus-booking-ui/actions/workflows/ui-build-and-deploy.yaml/badge.svg)](https://github.com/DoshiNeil/bus-booking-ui/actions/workflows/ui-build-and-deploy.yaml)
 
 ## Demo Url
 
