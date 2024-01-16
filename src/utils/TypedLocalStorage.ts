@@ -1,10 +1,4 @@
-export type Bookings = {
-  travelDate: Date;
-  seatNumber: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-};
+import { Bookings } from '../types/types';
 
 interface LocalStorageSchema {
   bookings: {

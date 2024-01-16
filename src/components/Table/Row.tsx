@@ -8,13 +8,13 @@ import {
 
 import { PassengerDetailsField } from '../BookingForm/PassengerDetails';
 import {
-  Bookings,
   getLocalStorageItem,
   setLocalStorageItem,
 } from '../../utils/TypedLocalStorage';
 
 import style from './table.module.css';
 import { emailPattern } from '../../constants/constants';
+import { Bookings } from '../../types/types';
 
 type RowProps = {
   bookingDate: Date;
@@ -169,7 +169,7 @@ export const Row: React.FC<RowProps> = ({
       <td className={style.tdStyle}>
         {isEditMode && (
           <input
-            className={style.inputStyle}
+            className={`${style.inputStyle} ${style.emailInputStyle}`}
             type="email"
             id="email"
             placeholder="Email"

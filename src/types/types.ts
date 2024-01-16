@@ -19,11 +19,6 @@ export enum RowMode {
   READ_ONLY,
 }
 
-export interface Seat {
-  number: string;
-  status: SeatStatus;
-}
-
 export interface ISeatMap {
   deck: Deck;
   seatSize: {
@@ -38,3 +33,11 @@ export interface ISeatMap {
     status: SeatStatus;
   }[];
 }
+
+export type Bookings = {
+  travelDate: Date;
+  seatNumber: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+};

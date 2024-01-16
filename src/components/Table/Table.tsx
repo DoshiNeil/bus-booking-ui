@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import style from './table.module.css';
 import { Row } from './Row';
-import { Bookings, getLocalStorageItem } from '../../utils/TypedLocalStorage';
+import { getLocalStorageItem } from '../../utils/TypedLocalStorage';
 import { Link } from 'react-router-dom';
+import { Bookings } from '../../types/types';
 
 export const Table: React.FC = () => {
   const [reservations, setReservations] = useState<Bookings[]>(

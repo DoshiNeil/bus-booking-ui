@@ -15,6 +15,10 @@
     font-size: 0.9rem;
 }
 
+.emailInputStyle{
+    max-width: 11rem;
+}
+
 .btnGroup{
     display: flex;
     gap:.35rem

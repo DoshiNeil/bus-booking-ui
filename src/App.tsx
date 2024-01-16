@@ -19,7 +19,7 @@ function App() {
               </ReservationContextProvider>
             }
           />
-          {/** move this to Page not found page*/}
+          {/** default to dashboard*/}
           <Route path="*" element={<Dashboard />} />
         </Routes>
       </RootLayout>

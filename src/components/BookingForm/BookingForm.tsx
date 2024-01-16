@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { PassengerDetails, PassengerDetailsField } from './PassengerDetails';
 import style from './bookingForm.module.css';
 import { ReservationContext } from '../Reservation/ReservationProvider';
-import { SeatStatus } from '../../types/types';
+import { Bookings, SeatStatus } from '../../types/types';
 import { useNavigate } from 'react-router-dom';
 import {
-  Bookings,
   getLocalStorageItem,
   setLocalStorageItem,
 } from '../../utils/TypedLocalStorage';
