@@ -20,7 +20,7 @@ export const Table: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className={style.table}>
       {!reservations && (
         <button>
           <Link to="/reservation">Reserve a Seat</Link>
